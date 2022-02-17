@@ -31,4 +31,34 @@ def recursion_candidaite(select_numbers,remain_numbers, candidaite):
         recursion_candidaite(select_numbers + remain_numbers[j], 
                              remain_numbers[0:j] + remain_numbers[j+1:], candidaite)
     
+         
      
+##########################upgrade code#########################
+
+prime_numbers = set()
+def solution(numbers):
+    select_numbers = ''
+    recursion_candidaite(select_numbers, numbers)
+    print(prime_numbers)
+    return len(prime_numbers)
+
+def check_decimal(candidaite):
+    if candidaite != 0 and candidaite != 1:
+        mok = 0
+        for j in range(2, candidaite):
+            if candidaite % j == 0:
+                mok += 1
+            if mok > 0:
+                break
+        if mok == 0:
+            return True
+
+def recursion_candidaite(select_numbers,remain_numbers):
+    global prime_numbers
+    if select_numbers != '':
+        if check_decimal(int(select_numbers)): 
+            prime_numbers.add(int(select_numbers))
+        
+    for j in range(0, len(remain_numbers)):
+        recursion_candidaite(select_numbers + remain_numbers[j], 
+                             remain_numbers[0:j] + remain_numbers[j+1:])
